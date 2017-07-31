@@ -93,3 +93,35 @@ extension UIView {
         setValue(true, forKey: Constants.exclusiveTouch)
     }
 }
+
+enum AppNavigationControllerMode {
+    case normal
+    case buffered
+    case canceling
+}
+
+final class AppNavigationController: UINavigationController {
+
+    var isBusy = false
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        delegate = self
+    }
+
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        print(viewController)
+        guard !isBusy else { return }
+
+        isBusy = true
+        super.pushViewController(viewController, animated: animated)
+    }
+}
+
+extension AppNavigationController: UINavigationControllerDelegate {
+
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        isBusy = false
+    }
+}
