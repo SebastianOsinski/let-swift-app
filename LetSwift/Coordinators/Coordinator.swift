@@ -23,9 +23,9 @@ import UIKit
 class Coordinator {
     
     var childCoordinators = [Coordinator]()
-    let navigationViewController: UINavigationController
+    let rootViewController: Navigable
     
-    init(navigationController: UINavigationController) {
-        self.navigationViewController = navigationController
+    init(rootViewController: Navigable) {
+        self.rootViewController = rootViewController
     }
 }

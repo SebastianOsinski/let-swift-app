@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 #endif
         
         let navigationController = UINavigationController()
-        appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator = AppCoordinator(rootViewController: navigationController)
         appCoordinator.start()
         
         window = UIWindow()

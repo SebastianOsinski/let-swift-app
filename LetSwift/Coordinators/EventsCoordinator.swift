@@ -29,7 +29,7 @@ final class EventsCoordinator: Coordinator, Startable {
         self.delegate = delegate
         self.initialEventsList = initialEventsList
         
-        super.init(navigationController: navigationController)
+        super.init(rootViewController: navigationController)
     }
     
     func start() {
@@ -37,7 +37,7 @@ final class EventsCoordinator: Coordinator, Startable {
         let viewController = EventsViewController(viewModel: viewModel)
         viewController.coordinatorDelegate = delegate
         
-        navigationViewController.viewControllers = [viewController]
+        rootViewController.controllers = [viewController]
     }
 }
 
@@ -45,7 +45,7 @@ extension EventsCoordinator: EventsViewControllerDelegate {
     func presentEventDetailsScreen(fromViewModel viewModel: EventsViewControllerViewModel) {
         let viewController = EventDetailsViewController(viewModel: viewModel)
         
-        navigationViewController.pushViewController(viewController, animated: true)
+        rootViewController.pushViewController(viewController, animated: true)
         
         if let event = viewModel.lastEventObservable.value {
             analyticsHelper.reportOpenEventDetails?(id: event.id, name: event.title)
@@ -57,14 +57,14 @@ extension EventsCoordinator: EventsViewControllerDelegate {
         let viewController = EventDetailsViewController(viewModel: viewModel)
         viewController.coordinatorDelegate = delegate
         
-        navigationViewController.pushViewController(viewController, animated: true)
+        rootViewController.pushViewController(viewController, animated: true)
     }
     
     func presentPhotoGalleryScreen(with photos: [Photo], eventId: Int?) {
         let viewModel = PhotoGalleryViewControllerViewModel(photos: photos, eventId: eventId, delegate: self)
         let viewController = PhotoGalleryViewController(viewModel: viewModel)
 
-        navigationViewController.pushViewController(viewController, animated: true)
+        rootViewController.pushViewController(viewController, animated: true)
     }
 }
 
@@ -73,6 +73,6 @@ extension EventsCoordinator: PhotoGalleryViewControllerDelegate {
         let viewController = PhotoSliderViewController(viewModel: viewModel)
         viewController.coordinatorDelegate = delegate
         
-        navigationViewController.present(viewController, animated: true)
+        rootViewController.present(viewController, animated: true, completion: nil)
     }
 }

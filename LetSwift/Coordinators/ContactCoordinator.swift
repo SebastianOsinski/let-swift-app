@@ -27,13 +27,13 @@ final class ContactCoordinator: Coordinator, Startable {
     init(navigationController: UINavigationController = UINavigationController(), delegate: AppCoordinatorDelegate) {
         self.delegate = delegate
 
-        super.init(navigationController: navigationController)
+        super.init(rootViewController: navigationController)
     }
     
     func start() {
         let controller = ContactViewController(viewModel: ContactViewControllerViewModel())
         controller.coordinatorDelegate = delegate
 
-        navigationViewController.viewControllers = [controller]
+        rootViewController.controllers = [controller]
     }
 }

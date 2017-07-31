@@ -24,16 +24,16 @@ final class SpeakersCoordinator: Coordinator, Startable, SpeakerLectureFlowDeleg
 
     fileprivate weak var delegate: AppCoordinatorDelegate?
 
-    init(navigationController: UINavigationController = UINavigationController(), delegate: AppCoordinatorDelegate) {
+    init(navigationController: UINavigationController = AppNavigationController(), delegate: AppCoordinatorDelegate) {
         self.delegate = delegate
 
-        super.init(navigationController: navigationController)
+        super.init(rootViewController: navigationController)
     }
 
     func start() {
         let controller = SpeakersViewController(viewModel: SpeakersViewControllerViewModel(delegate: self))
         controller.coordinatorDelegate = delegate
 
-        navigationViewController.viewControllers = [controller]
+        rootViewController.controllers = [controller]
     }
 }

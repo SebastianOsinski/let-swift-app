@@ -49,13 +49,14 @@ final class AppCoordinator: Coordinator, AppCoordinatorDelegate, Startable {
     }
     
     func start() {
-        navigationViewController.setNavigationBarHidden(true, animated: false)
+        //TODO: remove this when root controller will be changed
+        (rootViewController as! UINavigationController).setNavigationBarHidden(true, animated: false)
         
         presentSplashScreen()
     }
     
     private func present(viewController: UIViewController, animated: Bool = true) {
-        navigationViewController.setViewControllers([viewController], animated: animated)
+        (rootViewController as? UINavigationController)?.setViewControllers([viewController], animated: animated)
     }
     
     fileprivate func presentSplashScreen() {
@@ -87,14 +88,14 @@ final class AppCoordinator: Coordinator, AppCoordinatorDelegate, Startable {
         let viewController = LoginViewController(viewModel: viewModel)
         
         if asPopupWindow {
-            navigationViewController.pushViewController(viewController, animated: true)
+            rootViewController.pushViewController(viewController, animated: true)
         } else {
             present(viewController: viewController)
         }
     }
     
     func pushOnRootNavigationController(_ viewController: UIViewController, animated: Bool) {
-        navigationViewController.pushViewController(viewController, animated: animated)
+        rootViewController.pushViewController(viewController, animated: animated)
     }
     
     fileprivate func presentMainController() {
@@ -109,7 +110,7 @@ final class AppCoordinator: Coordinator, AppCoordinatorDelegate, Startable {
             self.childCoordinators.append($0)
         }
 
-        let viewController = TabBarViewController(controllers: coordinators.map({ ($0).navigationViewController }))
+        let viewController = TabBarViewController(controllers: coordinators.map({ ($0).rootViewController.asViewController }))
         
         present(viewController: viewController, animated: false)
     }
@@ -132,8 +133,8 @@ extension AppCoordinator: OnboardingViewControllerCoordinatorDelegate {
 
 extension AppCoordinator: LoginViewControllerDelegate {
     func facebookLoginCompleted() {
-        if navigationViewController.viewControllers.count > 1 {
-            navigationViewController.popViewController(animated: true)
+        if rootViewController.controllers.count > 1 {
+            rootViewController.popViewController(animated: true)
         } else {
             presentMainController()
         }
@@ -142,8 +143,8 @@ extension AppCoordinator: LoginViewControllerDelegate {
     func loginHasSkipped() {
         DefaultsManager.shared.isLoginSkipped = true
         
-        if navigationViewController.viewControllers.count > 1 {
-            navigationViewController.popViewController(animated: true)
+        if rootViewController.controllers.count > 1 {
+            rootViewController.popViewController(animated: true)
         } else {
             presentMainController()
         }
