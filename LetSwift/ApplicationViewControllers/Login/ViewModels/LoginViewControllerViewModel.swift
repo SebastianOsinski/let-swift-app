@@ -22,7 +22,7 @@ import Foundation
 
 final class LoginViewControllerViewModel {
 
-    var viewWillAppearPerformObservable = Observable<Void>()
+    var viewWillAppearPerformObservable = Observable<Void>(())
     var facebookAlertObservable = Observable<String?>(nil)
     var animateWithRandomTextObservable = Observable<String>("")
     

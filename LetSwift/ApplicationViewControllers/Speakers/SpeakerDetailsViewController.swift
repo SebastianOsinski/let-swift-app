@@ -66,11 +66,11 @@ final class SpeakerDetailsViewController: AppViewController {
     
     private func setupPullToRefresh() {
         tableView.addPullToRefresh { [weak self] in
-            self?.viewModel.refreshObservable.next()
+            self?.viewModel.refreshObservable.next(())
         }
         
         sadFaceView.scrollView?.addPullToRefresh { [weak self] in
-            self?.viewModel.refreshObservable.next()
+            self?.viewModel.refreshObservable.next(())
         }
         
         viewModel.refreshObservable.subscribeCompleted { [weak self] in

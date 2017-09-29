@@ -61,7 +61,7 @@ final class SpeakersViewController: AppViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        viewModel.searchBarShouldResignFirstResponderObservable.next()
+        viewModel.searchBarShouldResignFirstResponderObservable.next(())
     }
     
     private func setup() {
@@ -97,7 +97,7 @@ final class SpeakersViewController: AppViewController {
 
     private func addPullToRefresh() {
         sadFaceView.scrollView?.addPullToRefresh { [weak self] in
-            self?.viewModel.refreshDataObservable.next()
+            self?.viewModel.refreshDataObservable.next(())
         }
     }
 
@@ -135,7 +135,7 @@ final class SpeakersViewController: AppViewController {
         }
         .add(to: disposeBag)
 
-        viewModel.speakerLoadDataRequestObservable.next()
+        viewModel.speakerLoadDataRequestObservable.next(())
 
         reactiveSearchBarSetup()
 
@@ -194,7 +194,7 @@ final class SpeakersViewController: AppViewController {
         searchBar.searchBarSearchButtonClickedObservable.subscribeNext { [weak self] query in
             self?.searchBar.enableCancelButton()
             self?.viewModel.searchQueryObservable.next(query)
-            self?.viewModel.speakerLoadDataRequestObservable.next()
+            self?.viewModel.speakerLoadDataRequestObservable.next(())
         }
         .add(to: disposeBag)
 
@@ -209,7 +209,7 @@ final class SpeakersViewController: AppViewController {
 
         searchBar.searchBarTextDidChangeObservable.subscribeNext { [weak self] query in
             self?.viewModel.searchQueryObservable.next(query)
-            self?.viewModel.speakerLoadDataRequestObservable.next()
+            self?.viewModel.speakerLoadDataRequestObservable.next(())
         }
         .add(to: disposeBag)
     }
@@ -222,7 +222,7 @@ final class SpeakersViewController: AppViewController {
 
         tableView.itemDidSelectObservable.subscribeNext { [weak self] index in
             self?.viewModel.speakerCellDidTapWithIndexObservable.next(index.row)
-            self?.viewModel.searchBarShouldResignFirstResponderObservable.next()
+            self?.viewModel.searchBarShouldResignFirstResponderObservable.next(())
 
             self?.tableView.deselectRow(at: index, animated: false)
         }
@@ -231,7 +231,7 @@ final class SpeakersViewController: AppViewController {
         tableView.scrollViewDidScrollObservable.subscribeNext { [weak self] scrollView in
             guard let scrollView = scrollView, scrollView.isTracking else { return }
 
-            self?.viewModel.searchBarShouldResignFirstResponderObservable.next()
+            self?.viewModel.searchBarShouldResignFirstResponderObservable.next(())
         }
         .add(to: disposeBag)
 
@@ -248,7 +248,7 @@ final class SpeakersViewController: AppViewController {
 
             if currentYOffset > height + distance {
                 self?.showSpinner()
-                self?.viewModel.tryToLoadMoreDataObservable.next()
+                self?.viewModel.tryToLoadMoreDataObservable.next(())
             }
         }
         .add(to: disposeBag)
@@ -293,7 +293,7 @@ final class SpeakersViewController: AppViewController {
         }
 
         viewModel.searchQueryObservable.next("")
-        viewModel.speakerLoadDataRequestObservable.next()
+        viewModel.speakerLoadDataRequestObservable.next(())
     }
 
     private func clearStateAndScrollToTop() {

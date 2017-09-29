@@ -22,7 +22,7 @@ import Foundation
 
 final class SplashViewControllerViewModel {
 
-    var viewDidAppearPerformObservable = Observable<Void>()
+    var viewDidAppearPerformObservable = Observable<Void>(())
     weak var delegate: SplashViewControllerDelegate?
     
     private let disposeBag = DisposeBag()

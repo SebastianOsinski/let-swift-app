@@ -54,7 +54,7 @@ class EventsViewController: CommonEventViewController {
     }
     
     private func setup(previousEventsCell cell: PreviousEventsListTableViewCell) {
-        viewModel.previousEventsCellDidSetObservable.next()
+        viewModel.previousEventsCellDidSetObservable.next(())
         
         viewModel.previousEventsViewModelObservable.subscribeNext(startsWithInitialValue: true) { viewModel in
             cell.viewModel = viewModel
@@ -79,7 +79,7 @@ class EventsViewController: CommonEventViewController {
         
         switch element {
         case .image, .eventSummary:
-            viewModel.summaryCellDidTapObservable.next()
+            viewModel.summaryCellDidTapObservable.next(())
         default: break
         }
     }

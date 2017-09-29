@@ -57,21 +57,21 @@ final class EventsViewControllerViewModel {
     var attendanceStateObservable = Observable<AttendanceState>(.loading)
     var notificationStateObservable = Observable<NotificationState>(.notActive)
     var facebookAlertObservable = Observable<String?>(nil)
-    var loginScreenObservable = Observable<Void>()
-    var summaryCellDidTapObservable = Observable<Void>()
-    var locationCellDidTapObservable = Observable<Void>()
+    var loginScreenObservable = Observable<Void>(())
+    var summaryCellDidTapObservable = Observable<Void>(())
+    var locationCellDidTapObservable = Observable<Void>(())
     
-    var eventsListRefreshObservable = Observable<Void>()
-    var previousEventsCellDidSetObservable = Observable<Void>()
+    var eventsListRefreshObservable = Observable<Void>(())
+    var previousEventsCellDidSetObservable = Observable<Void>(())
     var previousEventsViewModelObservable = Observable<PreviousEventsListTableViewCellViewModel?>(nil)
     var previousEventsObservable = Observable<[Event?]?>(nil)
     
-    var eventDetailsRefreshObservable = Observable<Void>()
+    var eventDetailsRefreshObservable = Observable<Void>(())
     var carouselEventPhotosViewModelObservable = Observable<CarouselEventPhotosTableViewCellViewModel?>(nil)
     var lectureCellDidTapObservable = Observable<Int>(-1)
     var speakerCellDidTapObservable = Observable<Int>(-1)
 
-    var notificationPermissionsNotGrantedObservable = Observable<Void>()
+    var notificationPermissionsNotGrantedObservable = Observable<Void>(())
 
     var notificationManager: NotificationManager!
     weak var delegate: EventsViewControllerDelegate?
@@ -183,7 +183,7 @@ final class EventsViewControllerViewModel {
         .add(to: disposeBag)
 
         previousEventsCellDidSetObservable
-            .withLatest(from: previousEventsObservable, combine: { event in event.1 })
+            .withLatest(from: previousEventsObservable, combine: { _, event in event })
             .subscribeNext(startsWithInitialValue: true) { [weak self] _ in
                 guard let weakSelf = self else { return }
                 let subviewModel = PreviousEventsListTableViewCellViewModel(previousEvents: weakSelf.previousEventsObservable, refreshObservable: weakSelf.eventsListRefreshObservable, delegate: weakSelf.delegate)
@@ -274,7 +274,7 @@ final class EventsViewControllerViewModel {
         }
         guard let eventId = lastEventObservable.value?.facebook, attendanceStateObservable.value != .loading else { return }
         guard FacebookManager.shared.isLoggedIn else {
-            loginScreenObservable.next()
+            loginScreenObservable.next(())
             return
         }
         
@@ -313,7 +313,7 @@ final class EventsViewControllerViewModel {
                         analyticsHelper.reportEventAttendance?(id: id)
                     }
                 } else {
-                    self?.notificationPermissionsNotGrantedObservable.next()
+                    self?.notificationPermissionsNotGrantedObservable.next(())
                 }
             }
         }

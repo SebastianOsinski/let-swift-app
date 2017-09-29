@@ -105,7 +105,7 @@ final class PreviousEventsListTableViewCell: UITableViewCell, Localizable {
                     weakSelf.isMoreEventsRequested = true
                 } else {
                     weakSelf.scrollViewMoveWithAnimation(about: 60.0)
-                    weakSelf.viewModel.morePreviousEventsRequestObervable.next()
+                    weakSelf.viewModel.morePreviousEventsRequestObervable.next(())
                 }
             }
         }
@@ -119,11 +119,11 @@ final class PreviousEventsListTableViewCell: UITableViewCell, Localizable {
                 DispatchQueue.main.async {
                     weakSelf.scrollViewMoveWithAnimation(about: 60.0)
                 }
-                weakSelf.viewModel.morePreviousEventsRequestObervable.next()
+                weakSelf.viewModel.morePreviousEventsRequestObervable.next(())
                 weakSelf.isMoreEventsRequested = false
             } else {
                 weakSelf.scrollViewMoveWithAnimation(about: 0.0)
-                weakSelf.viewModel.morePreviousEventsRequestCanceledObservable.next()
+                weakSelf.viewModel.morePreviousEventsRequestCanceledObservable.next(())
                 weakSelf.isMoreEventsRequested = false
             }
         }

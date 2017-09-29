@@ -90,11 +90,11 @@ class CommonEventViewController: AppViewController {
     
     private func setupPullToRefresh() {
         tableView.addPullToRefresh { [weak self] in
-            self?.refreshObservable?.next()
+            self?.refreshObservable?.next(())
         }
         
         sadFaceView.scrollView?.addPullToRefresh { [weak self] in
-            self?.refreshObservable?.next()
+            self?.refreshObservable?.next(())
         }
         
         refreshObservable?.subscribeCompleted { [weak self] in
@@ -282,7 +282,7 @@ class CommonEventViewController: AppViewController {
     func dispatchCellSelect(element: EventCellIdentifier) {
         switch element {
         case .eventLocation:
-            viewModel.locationCellDidTapObservable.next()
+            viewModel.locationCellDidTapObservable.next(())
         default: break
         }
     }

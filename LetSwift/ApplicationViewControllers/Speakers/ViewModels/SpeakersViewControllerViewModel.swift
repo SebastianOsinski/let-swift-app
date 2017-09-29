@@ -40,17 +40,17 @@ final class SpeakersViewControllerViewModel {
     private var pendingRequest: Request?
     private var searchQuery = ""
 
-    var speakerLoadDataRequestObservable = Observable<Void>()
+    var speakerLoadDataRequestObservable = Observable<Void>(())
     var tableViewStateObservable: Observable<AppContentState>
     var checkIfLastSpeakerObservable = Observable<Int>(-1)
-    var tryToLoadMoreDataObservable = Observable<Void>()
-    var noMoreSpeakersToLoadObservable = Observable<Void>()
-    var errorOnLoadingMoreSpeakersObservable = Observable<Void>()
-    var refreshDataObservable = Observable<Void>()
+    var tryToLoadMoreDataObservable = Observable<Void>(())
+    var noMoreSpeakersToLoadObservable = Observable<Void>(())
+    var errorOnLoadingMoreSpeakersObservable = Observable<Void>(())
+    var refreshDataObservable = Observable<Void>(())
     var speakerCellDidTapWithIndexObservable = Observable<Int>(-1)
     var latestSpeakerCellDidTapWithIndexObservable = Observable<Int>(-1)
     var searchQueryObservable = Observable<String>("")
-    var searchBarShouldResignFirstResponderObservable = Observable<Void>()
+    var searchBarShouldResignFirstResponderObservable = Observable<Void>(())
     var errorViewStateObservable = Observable<ErrorReason>(.requestFail)
 
     weak var delegate: SpeakerLectureFlowDelegate?
@@ -163,7 +163,7 @@ final class SpeakersViewControllerViewModel {
         guard pendingRequest == nil else { return }
 
         guard currentPage < totalPage || totalPage == -1 else {
-            noMoreSpeakersToLoadObservable.next()
+            noMoreSpeakersToLoadObservable.next(())
             return
         }
 
@@ -174,7 +174,7 @@ final class SpeakersViewControllerViewModel {
                 self?.speakers.append(responeObject.elements)
                 self?.totalPage = responeObject.page.pageCount
             default:
-                self?.errorOnLoadingMoreSpeakersObservable.next()
+                self?.errorOnLoadingMoreSpeakersObservable.next(())
             }
 
             self?.pendingRequest = nil

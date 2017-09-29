@@ -23,8 +23,8 @@ import UIKit
 final class ReactiveSearchBar: UISearchBar {
 
     var searchBarSearchButtonClickedObservable = Observable<String>("")
-    var searchBarCancelButtonClicked = Observable<Void>()
-    var searchBarWillStartEditingObservable = Observable<Void>()
+    var searchBarCancelButtonClicked = Observable<Void>(())
+    var searchBarWillStartEditingObservable = Observable<Void>(())
     var searchBarTextDidChangeObservable = Observable<String>("")
 
     fileprivate lazy var textDidChangeDebouncer: Debouncer = Debouncer(delay: 0.3, callback: self.textDidChange)
@@ -62,7 +62,7 @@ extension ReactiveSearchBar: UISearchBarDelegate {
     }
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBarWillStartEditingObservable.next()
+        searchBarWillStartEditingObservable.next(())
         setShowsCancelButton(true, animated: true)
         
         return true
@@ -77,6 +77,6 @@ extension ReactiveSearchBar: UISearchBarDelegate {
         searchBar.text = ""
         setShowsCancelButton(false, animated: true)
         resignFirstResponder()
-        searchBarCancelButtonClicked.next()
+        searchBarCancelButtonClicked.next(())
     }
 }

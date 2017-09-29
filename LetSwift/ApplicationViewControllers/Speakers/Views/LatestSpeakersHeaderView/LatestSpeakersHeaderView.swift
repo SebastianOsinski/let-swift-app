@@ -54,7 +54,7 @@ final class LatestSpeakersHeaderView: DesignableView {
 extension LatestSpeakersHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel?.latestSpeakerCellDidTapWithIndexObservable.next(indexPath.row)
-        viewModel?.searchBarShouldResignFirstResponderObservable.next()
+        viewModel?.searchBarShouldResignFirstResponderObservable.next(())
         
         collectionView.deselectItem(at: indexPath, animated: false)
     }

@@ -25,7 +25,7 @@ final class SpeakerDetailsViewControllerViewModel {
     let speakerObservable = Observable<Speaker?>(nil)
     let tableViewStateObservable = Observable<AppContentState>(.loading)
     let showLectureDetailsObservable = Observable<Int?>(nil)
-    let refreshObservable = Observable<Void>()
+    let refreshObservable = Observable<Void>(())
     
     private let disposeBag = DisposeBag()
     private let speakerId: Int

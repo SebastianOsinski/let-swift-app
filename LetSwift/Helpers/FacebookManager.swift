@@ -56,8 +56,8 @@ final class FacebookManager {
     private let readPermissions = [String]()
     private let publishPermissions = [FacebookPermissions.rsvpEvent]
     
-    let facebookLoginObservable = Observable<Void>()
-    let facebookLogoutObservable = Observable<Void>()
+    let facebookLoginObservable = Observable<Void>(())
+    let facebookLogoutObservable = Observable<Void>(())
     
     private init() {
         FBSDKGraphRequestConnection.setDefaultConnectionTimeout(NetworkProvider.timeout)
@@ -75,7 +75,7 @@ final class FacebookManager {
                 if result.isCancelled {
                     callback?(.cancelled)
                 } else {
-                    self?.facebookLoginObservable.next()
+                    self?.facebookLoginObservable.next(())
                     callback?(.success(result))
                 }
             } else {
@@ -97,7 +97,7 @@ final class FacebookManager {
     func logOut() {
         loginManager.logOut()
         
-        facebookLogoutObservable.next()
+        facebookLogoutObservable.next(())
     }
     
     private func askForMissingPermissions(error: FacebookError?, callback: @escaping (Bool) -> Void) {
