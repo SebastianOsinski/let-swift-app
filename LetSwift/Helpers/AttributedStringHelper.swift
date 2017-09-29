@@ -34,7 +34,7 @@ func + (left: NSAttributedString, right: String) -> NSAttributedString {
     return result
 }
 
-fileprivate func paragraphStyle(with lineSpacing: CGFloat) -> NSParagraphStyle {
+private func paragraphStyle(with lineSpacing: CGFloat) -> NSParagraphStyle {
     let paragraphStyle = NSMutableParagraphStyle()
     paragraphStyle.lineBreakMode = .byTruncatingTail
     paragraphStyle.lineSpacing = lineSpacing

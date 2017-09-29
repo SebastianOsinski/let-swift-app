@@ -80,7 +80,7 @@ final class SpeakersViewController: AppViewController {
         colorView.backgroundColor = headerView.subviews.first?.backgroundColor
         headerView.addSubview(colorView)
 
-        tableView.registerCells([SpeakersTableViewCell.cellIdentifier])
+        tableView.register(cellIdentifiers: [SpeakersTableViewCell.cellIdentifier])
 
         setupPullToRefresh()
         reactiveSetup()

@@ -65,7 +65,7 @@ final class EventDetailsViewController: CommonEventViewController {
     }
 
     private func setup() {
-        tableView.registerCells([EventCellIdentifier.speakerCardCell.rawValue, EventCellIdentifier.speakersToBeAnnouncedCell.rawValue])
+        tableView.register(cellIdentifiers: [EventCellIdentifier.speakerCardCell.rawValue, EventCellIdentifier.speakersToBeAnnouncedCell.rawValue])
 
         reactiveSetup()
     }

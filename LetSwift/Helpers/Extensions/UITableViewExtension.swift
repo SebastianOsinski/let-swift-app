@@ -21,7 +21,7 @@
 import UIKit
 import ESPullToRefresh
 
-extension UITableView: NibPresentable {
+extension UITableView {
     func item<Cell: UITableViewCell, T, S: Sequence>(with identifier: String, cellType: Cell.Type = Cell.self)
         -> (@escaping (Int, T, Cell) -> ())
         -> (_ source: S)

@@ -62,7 +62,7 @@ final class PhotoGalleryViewController: AppViewController {
     }
 
     private func setup() {
-        collectionView.registerCells([SinglePhotoCollectionViewCell.self])
+        collectionView.register(cellClasses: [SinglePhotoCollectionViewCell.self])
         collectionView.delegate = self
         
         setupPullToRefresh()

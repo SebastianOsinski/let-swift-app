@@ -33,11 +33,11 @@ enum FacebookEventAttendance: String {
     case maybe
 }
 
-fileprivate enum FacebookPermissions {
+private enum FacebookPermissions {
     static let rsvpEvent = "rsvp_event"
 }
 
-fileprivate enum FacebookError: Int {
+private enum FacebookError: Int {
     case missingPermissions = 200
     case missingExtendedPermissions = 299 // HACK: Undocumented status code
     

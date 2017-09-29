@@ -82,7 +82,7 @@ class CommonEventViewController: AppViewController {
         let inset = navigationController?.navigationBar.frame.maxY ?? 0.0
         sadFaceView.scrollView?.contentInset = UIEdgeInsets(top: inset, left: 0.0, bottom: -inset, right: 0.0)
 
-        tableView.registerCells(allCells.map { $0.rawValue })
+        tableView.register(cellIdentifiers: allCells.map { $0.rawValue })
         
         setupPullToRefresh()
         reactiveSetup()

@@ -56,7 +56,7 @@ final class PreviousEventsListTableViewCell: UITableViewCell, Localizable {
     private func setup() {
         removeSeparators()
 
-        eventsCollectionView.registerCells([PreviousEventCollectionViewCell.self])
+        eventsCollectionView.register(cellClasses: [PreviousEventCollectionViewCell.self])
 
         spinnerView.image = #imageLiteral(resourceName: "WhiteSpinner")
         spinnerView.backgroundColor = .clear

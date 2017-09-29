@@ -58,7 +58,7 @@ final class SpeakerDetailsViewController: AppViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60.0
         tableView.setHeaderColor(.lightBlueGrey)
-        tableView.registerCells(allCells)
+        tableView.register(cellIdentifiers: allCells)
         
         setupPullToRefresh()
         reactiveSetup()

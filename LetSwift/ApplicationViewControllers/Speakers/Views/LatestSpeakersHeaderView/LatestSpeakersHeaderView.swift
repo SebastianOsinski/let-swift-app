@@ -37,7 +37,7 @@ final class LatestSpeakersHeaderView: DesignableView {
 
     private func setup() {
         latestCollectionView.delegate = self
-        latestCollectionView.registerCells([LatestSpeakerCollectionViewCell.self])
+        latestCollectionView.register(cellClasses: [LatestSpeakerCollectionViewCell.self])
 
         latestSpeakersTitleLabel.text = localized("SPEAKERS_LATEST_TITLE").uppercased()
 

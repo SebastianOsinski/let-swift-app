@@ -20,7 +20,7 @@
 
 import UIKit
 
-extension UICollectionView: NibPresentable {
+extension UICollectionView {
     func item<Cell: UICollectionViewCell, T, S: Sequence>(with identifier: String, cellType: Cell.Type = Cell.self)
         -> (((Int, T, Cell) -> ())?)
         -> (_ source: S)
